@@ -1,0 +1,12 @@
+FROM python:3.9-slim
+	# กำหนด Base Image เป็น python:3.9-slim
+WORKDIR /app
+	# กำหนด Working Directory เป็น /app ซึ่งจะเป็นไดเรกทอรีหลักสำหรับคำสั่งทั้งหมด
+COPY requirements.txt requirements.txt
+	# คัดลอกไฟล์ requirements.txt จากโฟลเดอร์ในเครื่องไปยังโฟลเดอร์ /app ใน Image
+RUN pip install -r requirements.txt
+	# ติดตั้งแพ็กเกจที่ระบุไว้ใน requirements.txt
+COPY . .
+	# คัดลอกไฟล์และโฟลเดอร์ทั้งหมดในโฟลเดอร์ปัจจุบันของเครื่องไปยัง Working Directory ก็คือ /app ใน Image
+CMD ["python", "auth.py"]
+	# เมื่อรัน จะรันคำสั่ง python auth.py
